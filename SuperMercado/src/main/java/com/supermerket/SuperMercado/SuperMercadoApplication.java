@@ -1,4 +1,4 @@
-package com.apisupermercado.SuperMercado;
+package com.supermerket.SuperMercado;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
