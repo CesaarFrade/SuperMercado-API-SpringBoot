@@ -5,8 +5,10 @@
 package com.supermerket.SuperMercado.service;
 
 import com.supermerket.SuperMercado.dto.ProductoDTO;
+import com.supermerket.SuperMercado.mapper.Mapper;
 import com.supermerket.SuperMercado.model.Producto;
 import com.supermerket.SuperMercado.repository.ProductoRepository;
+import exception.NotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,62 +26,33 @@ public class ProductoService implements IProductoService{
 
     @Override
     public void saveProducto(ProductoDTO productoDTO) {
-        productoRepo.save(dtoAProducto(productoDTO));
+        Producto prod = Producto.builder()
+                .nombre(productoDTO.getNombre())
+                .categoria(productoDTO.getCategoria())
+                .precioActual(productoDTO.getPrecio())
+                .stock(productoDTO.getCantidad())
+                .build();
+        productoRepo.save(prod);
     }
 
     @Override
     public List<ProductoDTO> getProductos() {
-        List<ProductoDTO> productosDTO = new ArrayList<>();
-        List<Producto> productos = productoRepo.findAll();
-        for(Producto producto : productos){
-            productosDTO.add(productoADTO(producto));
-        }
-        return productosDTO;
-    }
-
-    @Override
-    public ProductoDTO getProductoById(Long id) {
-        return productoADTO(productoRepo.findById(id).orElse(null));
+        return productoRepo.findAll().stream().map(Mapper::toDTO).toList();
     }
 
     @Override
     public void editProducto(ProductoDTO productoDTO) {
-        saveProducto(productoDTO);
+        // Vamos a buscar si existe ese producto
+        Producto prod = productoRepo.findById(productoDTO.getId()).orElseThrow(() -> new NotFoundException("Prodcuto no encontrado"));
+        if(prod != null){
+            saveProducto(productoDTO);
+        } else{
+            System.out.println("No existe ningun producto con ese id");
+        }
     }
 
     @Override
     public void deleteProducto(Long id) {
         productoRepo.deleteById(id);
-    }
-    
-    // Convertir de Entidad a DTO (Para enviar datos al cliente)
-    public ProductoDTO productoADTO(Producto producto) {
-        if (producto == null) return null;
-
-        ProductoDTO dto = new ProductoDTO();
-        dto.setId(producto.getId());
-        dto.setNombre(producto.getNombre());
-        dto.setCategoria(producto.getCategoria());
-        // Mapeo de nombres distintos
-        dto.setPrecio(producto.getPrecioActual());
-        dto.setCantidad(producto.getStock());
-
-        return dto;
-    }
-
-    // Convertir de DTO a Entidad (Para guardar o editar en DB)
-    public Producto dtoAProducto(ProductoDTO dto) {
-        if (dto == null) return null;
-
-        Producto producto = new Producto();
-        // Si el ID viene en el DTO, se lo asignamos (importante para editar)
-        producto.setId(dto.getId()); 
-        producto.setNombre(dto.getNombre());
-        producto.setCategoria(dto.getCategoria());
-        // Mapeo inverso de nombres distintos
-        producto.setPrecioActual(dto.getPrecio());
-        producto.setStock(dto.getCantidad());
-
-        return producto;
     }
 }
