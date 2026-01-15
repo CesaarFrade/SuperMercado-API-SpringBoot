@@ -43,16 +43,19 @@ public class ProductoService implements IProductoService{
     @Override
     public void editProducto(ProductoDTO productoDTO) {
         // Vamos a buscar si existe ese producto
-        Producto prod = productoRepo.findById(productoDTO.getId()).orElseThrow(() -> new NotFoundException("Prodcuto no encontrado"));
+        Producto prod = productoRepo.findById(productoDTO.getId()).orElseThrow(() -> new NotFoundException("Producto no encontrado"));
         if(prod != null){
             saveProducto(productoDTO);
-        } else{
-            System.out.println("No existe ningun producto con ese id");
-        }
+        } 
     }
 
     @Override
     public void deleteProducto(Long id) {
-        productoRepo.deleteById(id);
+        if(productoRepo.existsById(id)){
+            productoRepo.deleteById(id);
+        } else{
+            throw new NotFoundException("Producto no encontrado para eliminar");
+        }  
     }
+        
 }

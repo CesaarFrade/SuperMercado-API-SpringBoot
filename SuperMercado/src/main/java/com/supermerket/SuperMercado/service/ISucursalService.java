@@ -14,8 +14,7 @@ import java.util.List;
 public interface ISucursalService {
     // Metodos CRUD
     public void saveSucursal(SucursalDTO sucursalDTO);
-    public List<SucursalDTO> getSucursal();
-    public SucursalDTO getSucursalById(Long id);
+    public List<SucursalDTO> getSucursales();
     public void editSucursal(SucursalDTO sucursalDTO);
     public void deleteSucursal(Long id);
 }

@@ -5,9 +5,10 @@
 package com.supermerket.SuperMercado.service;
 
 import com.supermerket.SuperMercado.dto.SucursalDTO;
+import com.supermerket.SuperMercado.mapper.Mapper;
 import com.supermerket.SuperMercado.model.Sucursal;
 import com.supermerket.SuperMercado.repository.SucursalRepository;
-import java.util.ArrayList;
+import exception.NotFoundException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,45 +25,30 @@ public class SucursalService implements ISucursalService{
 
     @Override
     public void saveSucursal(SucursalDTO sucursalDTO) {
-        sucurRepo.save(dtoASucursal(sucursalDTO));
+        Sucursal sucursal = Sucursal.builder()
+                .id(sucursalDTO.getId())
+                .nombre(sucursalDTO.getNombre())
+                .direccion(sucursalDTO.getDireccion())
+                .build();
+        sucurRepo.save(sucursal);
     }
 
     @Override
-    public List<SucursalDTO> getSucursal() {
-        List<Sucursal> sucursales = sucurRepo.findAll();
-        List<SucursalDTO> sucursalesDTO = new ArrayList<>();
-        for(Sucursal sucursal : sucursales){
-            sucursalesDTO.add(sucursalADTO(sucursal));
-        }
-        return sucursalesDTO;
-    }
-
-    @Override
-    public SucursalDTO getSucursalById(Long id) {
-        Sucursal sucursal =  sucurRepo.findById(id).orElse(null);
-        return sucursalADTO(sucursal);
+    public List<SucursalDTO> getSucursales() {
+        return sucurRepo.findAll().stream().map(Mapper::toDTO).toList();
     }
 
     @Override
     public void editSucursal(SucursalDTO sucursalDTO) {
-        saveSucursal(sucursalDTO);
+        if(sucurRepo.existsById(sucursalDTO.getId())){
+            saveSucursal(sucursalDTO);
+        } else{
+            throw new NotFoundException("No existe ninguna sucursal con ese Id");
+        }
     }
 
     @Override
     public void deleteSucursal(Long id) {
         sucurRepo.deleteById(id);
-    }
-    
-    public SucursalDTO sucursalADTO(Sucursal sucursal){
-        SucursalDTO sucursalDTO = new SucursalDTO(sucursal.getId(), sucursal.getNombre(), sucursal.getDireccion());
-        return sucursalDTO;
-    }
-    
-    public Sucursal dtoASucursal(SucursalDTO sucursalDTO){
-        Sucursal sucursal = new Sucursal();
-        sucursal.setId(sucursalDTO.getId());
-        sucursal.setDireccion(sucursalDTO.getDireccion());
-        sucursal.setNombre(sucursalDTO.getNombre());
-        return sucursal;
     }
 }
