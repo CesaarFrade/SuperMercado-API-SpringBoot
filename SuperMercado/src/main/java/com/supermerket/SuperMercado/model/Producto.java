@@ -32,6 +32,6 @@ public class Producto {
     private Long id;
     private String nombre;
     private String categoria;
-    private int stock;
+    private int cantidad;
     private Double precioActual;
 }

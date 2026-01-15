@@ -1,0 +1,370 @@
+{
+	"info": {
+		"_postman_id": "8ecb2dde-9e9b-493b-b896-29bc213fd519",
+		"name": "My Collection",
+		"description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "51539043",
+		"_collection_link": "https://castrolvima-4057991.postman.co/workspace/Cesar's-Workspace~f77934ed-a928-4ba3-8caa-94092d9d92d1/collection/51539043-8ecb2dde-9e9b-493b-b896-29bc213fd519?action=share&source=collection_link&creator=51539043"
+	},
+	"item": [
+		{
+			"name": "Post Producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\": \"Cepillo de dientes\",\n    \"precio\": 5,\n    \"categoria\": \"Higiene personal\",\n    \"cantidad\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/producto/save",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"producto",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Productos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/producto/get",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"producto",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"nombre\": \"Jabon de manos olor fresa\",\r\n    \"precio\": 1.40,\r\n    \"categoria\": \"Higiene personal\",\r\n    \"cantidad\": 4\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/producto/edit/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"producto",
+						"edit",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Producto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/producto/delete/7",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"producto",
+						"delete",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Sucursales",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/sucursal/get",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sucursal",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Sucursal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\": \"DIA\",\n    \"direccion\": \"Paseo de Colon 5\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/sucursal/save",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sucursal",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Sucursal",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\": \"DIA\",\n    \"direccion\": \"Paseo de Colon 4\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/sucursal/edit/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sucursal",
+						"edit",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Sucursal",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/sucursal/delete/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sucursal",
+						"delete",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Ventas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/venta/get",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"venta",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Venta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idSucursal\": 1,\r\n    \"fecha\": \"2026-01-15\",\r\n    \"estado\": \"COMPLETADA\",\r\n    \"total\": 11.8,\r\n    \"detalles\": [\r\n        {\r\n            \"id\" : 2,\r\n            \"nombreProducto\": \"Cepillo de dientes\",\r\n            \"cantProducto\": 2,\r\n            \"precio\": 1.5\r\n        },\r\n        {\r\n            \"id\" : 1,\r\n            \"nombreProducto\": \"Salmon 500g\",\r\n            \"cantProducto\": 1,\r\n            \"precio\": 7.8\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/venta/save",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"venta",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Venta",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n    \"idSucursal\": 1,\n    \"fecha\": \"2026-01-15\",\n    \"estado\": \"PENDIENTE DE PAGO\",\n    \"total\": 11.8,\n    \"detalles\": [\n        {\n            \"id\" : 1,\n            \"nombreProducto\": \"Cepillo de dientes\",\n            \"cantProducto\": 2,\n            \"precio\": 1.5\n        },\n        {\n            \"id\" : 2,\n            \"nombreProducto\": \"Salmon 500g\",\n            \"cantProducto\": 1,\n            \"precio\": 7.8\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/venta/edit/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"venta",
+						"edit",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Venta",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/venta/delete/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"venta",
+						"delete",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

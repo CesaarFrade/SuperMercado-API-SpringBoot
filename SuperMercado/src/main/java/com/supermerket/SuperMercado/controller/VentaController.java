@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,13 +33,13 @@ public class VentaController {
     }
     
     @PostMapping("/venta/save")
-    public void saveVenta(@RequestParam VentaDTO venta){
+    public void saveVenta(@RequestBody VentaDTO venta){
         ventServ.saveVenta(venta);
     }
     
-    @PutMapping("/venta/edit")
-    public void editVenta(@RequestParam VentaDTO venta){
-        ventServ.editVenta(venta);
+    @PutMapping("/venta/edit/{id}")
+    public void editVenta(@RequestBody VentaDTO venta, @PathVariable Long id){
+        ventServ.editVenta(venta, id);
     }
     
     @DeleteMapping("/venta/delete/{id}")

@@ -16,6 +16,6 @@ public interface IProductoService {
     // Metodos CRUD
     public void saveProducto(ProductoDTO productoDTO);
     public List<ProductoDTO> getProductos();
-    public void editProducto(ProductoDTO productoDTO);
+    public void editProducto(ProductoDTO productoDTO, Long id);
     public void deleteProducto(Long id);
 }

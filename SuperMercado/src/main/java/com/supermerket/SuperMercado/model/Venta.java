@@ -4,7 +4,9 @@
  */
 package com.supermerket.SuperMercado.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -38,6 +40,7 @@ public class Venta {
     private Double total;
     @ManyToOne
     private Sucursal sucursal;
-    @OneToMany(mappedBy = "venta")
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true, 
+            fetch = FetchType.EAGER)
     private List<DetalleVenta> detalles = new ArrayList<>();
 }

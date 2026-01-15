@@ -15,6 +15,6 @@ public interface IVentaService {
     // Metodos CRUD
     public void saveVenta(VentaDTO ventaDTO);
     public List<VentaDTO> getVentas();
-    public void editVenta(VentaDTO ventaDTO);
+    public void editVenta(VentaDTO ventaDTO, Long id);
     public void deleteVenta(Long id);
 }

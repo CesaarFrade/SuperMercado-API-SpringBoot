@@ -15,6 +15,6 @@ public interface ISucursalService {
     // Metodos CRUD
     public void saveSucursal(SucursalDTO sucursalDTO);
     public List<SucursalDTO> getSucursales();
-    public void editSucursal(SucursalDTO sucursalDTO);
+    public void editSucursal(SucursalDTO sucursalDTO, Long id);
     public void deleteSucursal(Long id);
 }

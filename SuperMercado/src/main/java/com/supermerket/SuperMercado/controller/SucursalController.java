@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,13 +33,13 @@ public class SucursalController {
     }
     
     @PostMapping("/sucursal/save")
-    public void saveSucursal(@RequestParam SucursalDTO sucursal){
+    public void saveSucursal(@RequestBody SucursalDTO sucursal){
         sucServ.saveSucursal(sucursal);
     }
     
-    @PutMapping("/sucursal/edit")
-    public void editSucursal(@RequestParam SucursalDTO sucursal){
-        sucServ.editSucursal(sucursal);
+    @PutMapping("/sucursal/edit/{id}")
+    public void editSucursal(@RequestBody SucursalDTO sucursal, @PathVariable Long id){
+        sucServ.editSucursal(sucursal, id);
     }
     
     @DeleteMapping("/sucursal/delete/{id}")

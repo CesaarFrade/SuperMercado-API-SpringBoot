@@ -39,12 +39,17 @@ public class SucursalService implements ISucursalService{
     }
 
     @Override
-    public void editSucursal(SucursalDTO sucursalDTO) {
-        if(sucurRepo.existsById(sucursalDTO.getId())){
-            saveSucursal(sucursalDTO);
-        } else{
-            throw new NotFoundException("No existe ninguna sucursal con ese Id");
-        }
+    public void editSucursal(SucursalDTO sucursalDTO, Long id) {
+        // 1. Buscamos la entidad original (si no existe, lanzamos excepción de una vez)
+        Sucursal sucursal = sucurRepo.findById(id)
+            .orElseThrow(() -> new NotFoundException("No existe la sucursal con Id: " + id));
+
+        // 2. Actualizamos los campos manualmente (o con un mapper)
+        sucursal.setNombre(sucursalDTO.getNombre());
+        sucursal.setDireccion(sucursalDTO.getDireccion());
+
+        // 3. Guardamos la entidad actualizada
+        sucurRepo.save(sucursal);
     }
 
     @Override

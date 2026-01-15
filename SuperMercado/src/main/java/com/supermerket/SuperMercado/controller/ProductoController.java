@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,13 +35,13 @@ public class ProductoController {
     }
     
     @PostMapping("/producto/save")
-    public void saveProducto(@RequestParam ProductoDTO producto){
+    public void saveProducto(@RequestBody ProductoDTO producto){
         prodServ.saveProducto(producto);
     }
     
-    @PutMapping("/producto/edit")
-    public void editProducto(@RequestParam ProductoDTO producto){
-        prodServ.editProducto(producto);
+    @PutMapping("/producto/edit/{id}")
+    public void editProducto(@RequestBody ProductoDTO producto, @PathVariable Long id){
+        prodServ.editProducto(producto, id);
     }
     
     @DeleteMapping("/producto/delete/{id}")
